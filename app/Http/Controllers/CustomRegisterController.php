@@ -59,7 +59,7 @@ class CustomRegisterController extends Controller
 
         ];
             //login attemp if login then direct to home..
-            if(Auth::attempt($credentials,$request->filled(remember))){
+            if(Auth::attempt($credentials,$request->filled('remember'))){
                 $request->session()->regenerate();
                 return redirect()->intended('home');
             }
