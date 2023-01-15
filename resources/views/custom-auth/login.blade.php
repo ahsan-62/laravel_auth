@@ -29,6 +29,10 @@
                                     </span>
                                 @enderror
                             </div>
+                            <div class="form-check mb-3">
+                                <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
+                                <label class="form-check-label" for="exampleCheck1">Remember me</label>
+                            </div>
                             <div class="mb-3">
                                 <button type="submit" class="btn btn-primary">Log in</button>
                             </div>

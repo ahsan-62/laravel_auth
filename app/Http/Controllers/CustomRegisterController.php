@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\loginUserRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -48,9 +49,25 @@ class CustomRegisterController extends Controller
             return view('custom-auth.login');
     }
 
-    public function loginUser( Request $request)
+    public function loginUser( loginUserRequest $request)
     {
+    //    dd($request->all());
 
+       $credentials=[
+        'email'=>$request->email,
+        'password'=>$request->password,
+
+        ];
+            //login attemp if login then direct to home..
+            if(Auth::attempt($credentials,$request->filled(remember))){
+                $request->session()->regenerate();
+                return redirect()->intended('home');
+            }
+
+            //error message if wrong email
+            return back()->withErrors([
+                'email'=>'Wrong Credentials Found!'
+            ])->onlyInput('email');
     }
 
     public function logout( Request $request)
